@@ -23,10 +23,10 @@ class HomePage extends StatelessWidget {
             items: [
               BottomNavigationBarItem(
                 label: 'Characters',
-                icon: Icon(Icons.list),
+                icon: Icon(Icons.people),
               ),
               BottomNavigationBarItem(
-                label: 'CharactersDetail',
+                label: 'Characters Detail',
                 icon: Icon(Icons.abc),
               ),
             ],
