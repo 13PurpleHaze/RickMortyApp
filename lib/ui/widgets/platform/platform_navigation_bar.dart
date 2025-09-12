@@ -20,6 +20,8 @@ class PlatformNavigationBar extends StatelessWidget {
     if (Platform.isAndroid) {
       return BottomNavigationBar(
         currentIndex: currentIndex,
+        unselectedItemColor: Theme.of(context).colorScheme.secondary,
+        selectedItemColor: Theme.of(context).primaryColor,
         onTap: onTap,
         items: items,
       );
