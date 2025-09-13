@@ -29,6 +29,15 @@ class Character {
     required this.episode,
   });
 
+  Map<String, String> get characteristics => {
+    'Status': status.name,
+    'Gender': gender.name,
+    'Origin': origin.name,
+    'Location': location.name,
+    'Species': species,
+    'Name': name,
+  };
+
   factory Character.fromJson(Map<String, dynamic> json) =>
       _$CharacterFromJson(json);
   Map<String, dynamic> toJson() => _$CharacterToJson(this);

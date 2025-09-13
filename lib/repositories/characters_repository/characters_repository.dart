@@ -23,4 +23,14 @@ class CharactersRepository implements AbstractCharactersRepository {
 
     return characters;
   }
+
+  @override
+  Future<Character> loadCharacterById({required int id}) async {
+    final response = await Dio().get(
+      'https://rickandmortyapi.com/api/character/$id',
+    );
+
+    final character = Character.fromJson(response.data as Map<String, dynamic>);
+    return character;
+  }
 }
