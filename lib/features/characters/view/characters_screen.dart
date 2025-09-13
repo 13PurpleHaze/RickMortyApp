@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_morty_app/features/characters/bloc/characters_bloc.dart';
 import 'package:rick_morty_app/features/characters/widgets/character_card.dart';
 import 'package:rick_morty_app/features/characters/widgets/character_card_shimmer.dart';
+import 'package:rick_morty_app/router/router.dart';
 import 'package:rick_morty_app/ui/widgets/widgets.dart';
 
 @RoutePage()
@@ -74,7 +75,11 @@ class _CharactersScreenState extends State<CharactersScreen> {
                             name: character.name,
                             image: character.image,
                             status: character.status,
-                            onTap: () => {},
+                            onTap: () {
+                              context.router.push(
+                                CharacterDetailRoute(id: character.id),
+                              );
+                            },
                           );
                         }
                       },

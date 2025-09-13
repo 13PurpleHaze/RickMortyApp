@@ -11,19 +11,50 @@
 part of 'router.dart';
 
 /// generated route for
-/// [CharactersDetailScreen]
-class CharactersDetailRoute extends PageRouteInfo<void> {
-  const CharactersDetailRoute({List<PageRouteInfo>? children})
-    : super(CharactersDetailRoute.name, initialChildren: children);
+/// [CharacterDetailScreen]
+class CharacterDetailRoute extends PageRouteInfo<CharacterDetailRouteArgs> {
+  CharacterDetailRoute({
+    Key? key,
+    required int id,
+    List<PageRouteInfo>? children,
+  }) : super(
+         CharacterDetailRoute.name,
+         args: CharacterDetailRouteArgs(key: key, id: id),
+         initialChildren: children,
+       );
 
-  static const String name = 'CharactersDetailRoute';
+  static const String name = 'CharacterDetailRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const CharactersDetailScreen();
+      final args = data.argsAs<CharacterDetailRouteArgs>();
+      return CharacterDetailScreen(key: args.key, id: args.id);
     },
   );
+}
+
+class CharacterDetailRouteArgs {
+  const CharacterDetailRouteArgs({this.key, required this.id});
+
+  final Key? key;
+
+  final int id;
+
+  @override
+  String toString() {
+    return 'CharacterDetailRouteArgs{key: $key, id: $id}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! CharacterDetailRouteArgs) return false;
+    return key == other.key && id == other.id;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ id.hashCode;
 }
 
 /// generated route for

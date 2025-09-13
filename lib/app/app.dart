@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rick_morty_app/features/character_detail/bloc/character_detail_bloc.dart';
 import 'package:rick_morty_app/features/characters/bloc/characters_bloc.dart';
 import 'package:rick_morty_app/features/episodes/bloc/episodes_bloc.dart';
 import 'package:rick_morty_app/features/episodes/repository/episodes_repository.dart';
@@ -25,6 +26,13 @@ class App extends StatelessWidget {
         BlocProvider(
           create:
               (context) => EpisodesBloc(episodesRepository: episodesRepository),
+        ),
+        BlocProvider(
+          create:
+              (context) => CharacterDetailBloc(
+                charactersRepository: charactersRepository,
+                episodesRepository: episodesRepository,
+              ),
         ),
       ],
       child: MaterialApp.router(
