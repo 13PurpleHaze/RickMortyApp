@@ -6,7 +6,7 @@ final appTheme = ThemeData(
   useMaterial3: true,
   primaryColor: primaryColor,
   colorScheme: ColorScheme.fromSeed(
-    brightness: Brightness.light,
+    brightness: Brightness.dark,
     seedColor: primaryColor,
   ),
 );

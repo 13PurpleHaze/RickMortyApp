@@ -91,10 +91,11 @@ class _PlatformAppBarState extends State<PlatformAppBar> {
       return widget.onChangeSearchBarTextChange != null
           ? CupertinoSliverNavigationBar.search(
             stretch: true,
+            backgroundColor: CupertinoThemeData().barBackgroundColor,
             largeTitle: Text(widget.title),
             onSearchableBottomTap: widget.onSearchableBottomTap,
             searchField: CupertinoSearchTextField(
-              autofocus: false,
+              autofocus: true,
               placeholder: 'Search',
               onChanged: widget.onChangeSearchBarTextChange,
             ),
@@ -105,6 +106,7 @@ class _PlatformAppBarState extends State<PlatformAppBar> {
           )
           : CupertinoSliverNavigationBar(
             stretch: true,
+            backgroundColor: CupertinoThemeData().barBackgroundColor,
             largeTitle: Text(widget.title),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,

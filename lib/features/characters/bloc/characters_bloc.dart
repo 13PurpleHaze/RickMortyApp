@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:rick_morty_app/models/models.dart';
 import 'package:rick_morty_app/repositories/repositories.dart';
 
@@ -9,7 +12,8 @@ part 'characters_state.dart';
 class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
   final CharactersRepository charactersRepository;
   int _page = 0;
-  String _query = '';
+  final int _limit = 20;
+  String _searchQuery = '';
 
   CharactersBloc({required this.charactersRepository})
     : super(CharactersInitial()) {
@@ -30,7 +34,7 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
       emit(
         CharactersLoaded(
           characters: characters,
-          canLoadMore: characters.length == 20,
+          canLoadMore: characters.length == _limit,
         ),
       );
     } catch (e) {
@@ -59,7 +63,7 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
       emit(
         CharactersLoaded(
           characters: [...currentState.characters, ...characters],
-          canLoadMore: characters.length == 20,
+          canLoadMore: characters.length == _limit,
         ),
       );
     } catch (e) {
@@ -73,15 +77,20 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
   ) async {
     try {
       _page = 1;
-      final characters = await charactersRepository.loadCharacters(page: _page);
+      final characters = await charactersRepository.loadCharacters(
+        page: _page,
+        search: _searchQuery,
+      );
       emit(
         CharactersLoaded(
           characters: characters,
-          canLoadMore: characters.length == 20,
+          canLoadMore: characters.length == _limit,
         ),
       );
     } catch (e) {
       emit(CharactersFailure(error: e));
+    } finally {
+      event.completer.complete();
     }
   }
 
@@ -91,14 +100,14 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
   ) async {
     try {
       _page = 1;
-      _query = event.search;
+      _searchQuery = event.search;
 
-      if (_query.isEmpty) {
+      if (_searchQuery.isEmpty) {
         add(LoadCharacters());
         return;
       }
 
-      if (_query.length < 3) {
+      if (_searchQuery.length < 3) {
         return;
       }
 
@@ -106,15 +115,13 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
 
       final characters = await charactersRepository.loadCharacters(
         page: _page,
-        search: _query,
+        search: _searchQuery,
       );
 
       emit(
         CharactersLoaded(
           characters: characters,
-          canLoadMore: characters.length == 20,
-          //isSearch: true,
-          //searchQuery: _currentSearch,
+          canLoadMore: characters.length == _limit,
         ),
       );
     } catch (e) {
