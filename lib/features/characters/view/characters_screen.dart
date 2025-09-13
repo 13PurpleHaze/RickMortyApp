@@ -1,10 +1,13 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:rick_morty_app/features/characters/bloc/characters_bloc.dart';
 import 'package:rick_morty_app/features/characters/widgets/character_card.dart';
-import 'package:rick_morty_app/features/characters/widgets/character_shimmer.dart';
+import 'package:rick_morty_app/features/characters/widgets/character_card_shimmer.dart';
 import 'package:rick_morty_app/ui/widgets/widgets.dart';
 
 @RoutePage()
@@ -29,7 +32,7 @@ class _CharactersScreenState extends State<CharactersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: RefreshIndicator.adaptive(
-        onRefresh: _refresh,
+        onRefresh: _onRefresh,
         child: CustomScrollView(
           controller: _scrollController,
           slivers: [
@@ -55,7 +58,6 @@ class _CharactersScreenState extends State<CharactersScreen> {
                             maxCrossAxisExtent: 200,
                             mainAxisSpacing: 16,
                             crossAxisSpacing: 16,
-                            childAspectRatio: 0.8,
                           ),
                       itemCount:
                           state.characters.length % 2 == 0
@@ -65,7 +67,7 @@ class _CharactersScreenState extends State<CharactersScreen> {
                                   (state.canLoadMore ? 3 : 0),
                       itemBuilder: (context, index) {
                         if (index >= state.characters.length) {
-                          return CharacterShimmer();
+                          return CharacterCardShimmer();
                         } else {
                           final character = state.characters[index];
                           return CharacterCard(
@@ -78,10 +80,8 @@ class _CharactersScreenState extends State<CharactersScreen> {
                       },
                     ),
                   ),
-                  // TODO: Handle this case.
-                  CharactersState() => SliverFillRemaining(
-                    child: PlatformBackgroundLoader(),
-                  ),
+                  // do nothing
+                  CharactersState _ => SliverFillRemaining(),
                 };
               },
             ),
@@ -124,8 +124,11 @@ class _CharactersScreenState extends State<CharactersScreen> {
     BlocProvider.of<CharactersBloc>(context).add(LoadMoreCharacters());
   }
 
-  Future<void> _refresh() async {
-    await Future.delayed(const Duration(seconds: 2));
-    BlocProvider.of<CharactersBloc>(context).add(RefreshCharacters());
+  Future<void> _onRefresh() async {
+    final completer = Completer();
+    BlocProvider.of<CharactersBloc>(
+      context,
+    ).add(RefreshCharacters(completer: completer));
+    return completer.future;
   }
 }
