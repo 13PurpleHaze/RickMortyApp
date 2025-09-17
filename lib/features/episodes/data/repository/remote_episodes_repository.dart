@@ -18,10 +18,22 @@ class RemoteEpisodeRepository implements EpisodeRepository {
     if (ids.isNotEmpty) {
       urlString += '/${ids.join(',')}';
       final response = await dio.get(urlString);
-      final data = response.data as List<dynamic>;
-      return data
-          .map((episode) => EpisodeModel.fromJson(episode).toEntity())
-          .toList();
+
+      if (ids.length > 1) {
+        final data = response.data as List<dynamic>;
+        return data
+            .map(
+              (episode) =>
+                  EpisodeModel.fromJson(
+                    episode as Map<String, dynamic>,
+                  ).toEntity(),
+            )
+            .toList();
+      }
+
+      return [
+        EpisodeModel.fromJson(response.data as Map<String, dynamic>).toEntity(),
+      ];
     }
 
     final Map<String, dynamic> queryParams = {'page': page};
