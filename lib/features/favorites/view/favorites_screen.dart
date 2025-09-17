@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:rick_morty_app/ui/widgets/widgets.dart';
+
+import 'package:rick_morty_app/core/ui/ui.dart';
 
 @RoutePage()
 class FavoritesScreen extends StatefulWidget {
