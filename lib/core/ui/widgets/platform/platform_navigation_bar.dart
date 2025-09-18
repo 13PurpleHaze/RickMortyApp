@@ -15,7 +15,7 @@ class PlatformNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (Theme.of(context).platform == 'Android') {
+    if (Theme.of(context).platform == TargetPlatform.android) {
       return BottomNavigationBar(
         currentIndex: currentIndex,
         unselectedItemColor: Theme.of(context).colorScheme.secondary,

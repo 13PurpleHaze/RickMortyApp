@@ -8,8 +8,14 @@ const iconSize = 40.0;
 class CustomAppBar extends StatelessWidget {
   final String imageUrl;
   final String title;
+  final Widget trailing;
 
-  const CustomAppBar({super.key, required this.imageUrl, required this.title});
+  const CustomAppBar({
+    super.key,
+    required this.imageUrl,
+    required this.title,
+    required this.trailing,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +24,7 @@ class CustomAppBar extends StatelessWidget {
       stretch: true,
       centerTitle: true,
       pinned: true,
+      actions: [trailing],
       flexibleSpace: FlexibleSpaceBar(
         background: Stack(
           fit: StackFit.passthrough,

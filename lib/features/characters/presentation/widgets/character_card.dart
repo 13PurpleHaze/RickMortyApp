@@ -63,6 +63,7 @@ class CharacterCard extends StatelessWidget {
                       status: _convertCharacterStatusToTagStatus(status),
                     ),
                   ),
+
                   Container(
                     color: Theme.of(
                       context,

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -37,7 +35,7 @@ class _PlatformAppBarState extends State<PlatformAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isAndroid) {
+    if (Theme.of(context).platform == TargetPlatform.android) {
       return SliverAppBar(
         title: Text(widget.title),
         centerTitle: true,

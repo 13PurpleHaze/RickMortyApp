@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:rick_morty_app/features/episodes/domain/entities/entities.dart';
+
+import '../../domain/entities/entities.dart';
 
 part 'episode_model.g.dart';
 

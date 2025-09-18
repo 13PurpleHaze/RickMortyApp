@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 
-import 'package:rick_morty_app/features/episodes/episodes.dart';
+import '../../domain/domain.dart';
 
 part 'episodes_event.dart';
 part 'episodes_state.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:rick_morty_app/features/settings/settings.dart';
-import 'package:rick_morty_app/features/theme/presentation/cubit/theme_state.dart';
+import './theme_state.dart';
 
 class ThemeCubit extends Cubit<ThemeState> {
   final SettingsRepository _settingsRepository;
