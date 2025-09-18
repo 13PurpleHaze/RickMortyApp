@@ -7,6 +7,7 @@
     <img src="./arts/CharacterDetail.png" alt="Mobile view" width="250"/>
     <img src="./arts/EpisodesScreen.png" alt="Mobile view" width="250"/>
     <img src="./arts/SettingsScreen.png" alt="Mobile view" width="250"/>
+    <img src="./arts/Favorites.png" alt="Mobile view" width="250"/>
     <img src="./arts/SettingsScreenLight.png" alt="Mobile view" width="250"/>
     <img src="./arts/CharacterDetailLight.png" alt="Mobile view" width="250"/>
     <img src="./arts/EpisodesShimmer.png" alt="Mobile view" width="250"/>
