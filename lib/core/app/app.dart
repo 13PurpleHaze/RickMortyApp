@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rick_morty_app/core/db/database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:rick_morty_app/core/ui/ui.dart';
@@ -12,19 +13,23 @@ import 'package:rick_morty_app/features/characters/characters.dart';
 import 'package:rick_morty_app/features/episodes/episodes.dart';
 import 'package:rick_morty_app/features/character/character.dart';
 import 'package:rick_morty_app/features/settings/settings.dart';
+import 'package:rick_morty_app/features/add_to_favorites/add_to_favorites.dart';
+import 'package:rick_morty_app/features/favorites/favorites.dart';
 
 class App extends StatelessWidget {
   final _appRouter = AppRouter();
   final Dio dio;
   final SharedPreferences preferences;
   final Map<String, String> config;
+  final AppDatabase database;
 
   App({
     super.key,
     required this.preferences,
     required this.dio,
-    con,
+
     required this.config,
+    required this.database,
   });
 
   @override
@@ -40,6 +45,9 @@ class App extends StatelessWidget {
         RepositoryProvider<SettingsRepository>(
           create:
               (context) => LocalSettingsRepository(preferences: preferences),
+        ),
+        RepositoryProvider<FavoriteRepository>(
+          create: (context) => LocalFavoritesRepository(database: database),
         ),
       ],
       child: MultiBlocProvider(
@@ -67,6 +75,18 @@ class App extends StatelessWidget {
             create:
                 (context) => ThemeCubit(
                   settingsRepository: context.read<SettingsRepository>(),
+                ),
+          ),
+          BlocProvider(
+            create:
+                (context) => AddToFavoritesBloc(
+                  favoriteRepository: context.read<FavoriteRepository>(),
+                ),
+          ),
+          BlocProvider(
+            create:
+                (context) => FavoritesBloc(
+                  favoriteRepository: context.read<FavoriteRepository>(),
                 ),
           ),
         ],

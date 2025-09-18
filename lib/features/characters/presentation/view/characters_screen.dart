@@ -7,9 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_morty_app/core/router/router.dart';
 import 'package:rick_morty_app/core/ui/ui.dart';
 
-import 'package:rick_morty_app/features/characters/presentation/bloc/characters_bloc.dart';
-import 'package:rick_morty_app/features/characters/presentation/widgets/character_card.dart';
-import 'package:rick_morty_app/features/characters/presentation/widgets/character_card_shimmer.dart';
+import '../bloc/characters_bloc.dart';
+import '../widgets/widgets.dart';
 
 const cardSize = 200.0;
 

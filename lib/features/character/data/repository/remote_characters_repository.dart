@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:rick_morty_app/features/character/domain/entities/entities.dart';
-import 'package:rick_morty_app/features/character/domain/repository/repository.dart';
-import 'package:rick_morty_app/features/character/data/models/models.dart';
+
+import '../../domain/domain.dart';
+import '../../data/models/models.dart';
 
 class RemoteCharactersRepository implements CharacterRepository {
   final Dio dio;

@@ -3,9 +3,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:rick_morty_app/core/ui/ui.dart';
+import 'package:rick_morty_app/features/add_to_favorites/add_to_favorites.dart';
 
-import 'package:rick_morty_app/features/character_detail/presentation/bloc/character_detail_bloc.dart';
-import 'package:rick_morty_app/features/character_detail/presentation/widgets/widgets.dart';
+import '../bloc/character_detail_bloc.dart';
+import '../widgets/widgets.dart';
 
 @RoutePage()
 class CharacterDetailScreen extends StatefulWidget {
@@ -44,6 +45,7 @@ class _CharacterDetailScreenState extends State<CharacterDetailScreen> {
                   CustomAppBar(
                     imageUrl: state.character.image,
                     title: state.character.name,
+                    trailing: ToggleFavoritesButton(character: state.character),
                   ),
                   CharacteristicsList(
                     itemCount: state.character.characteristics.length + 1,

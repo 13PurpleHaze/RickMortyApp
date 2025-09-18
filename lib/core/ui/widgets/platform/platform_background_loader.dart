@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +6,7 @@ class PlatformBackgroundLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isAndroid) {
+    if (Theme.of(context).platform == TargetPlatform.android) {
       return Center(child: CircularProgressIndicator(strokeWidth: 5));
     }
     return CupertinoActivityIndicator();

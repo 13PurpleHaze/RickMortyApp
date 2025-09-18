@@ -1,6 +1,4 @@
-import 'package:rick_morty_app/features/character/domain/entities/character_gender.dart';
-import 'package:rick_morty_app/features/character/domain/entities/character_status.dart';
-import 'package:rick_morty_app/features/character/domain/entities/name_link.dart';
+import '../../domain/domain.dart';
 
 class Character {
   final int id;

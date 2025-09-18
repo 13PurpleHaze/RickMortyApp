@@ -1,8 +1,7 @@
 import 'package:dio/dio.dart';
 
-import 'package:rick_morty_app/features/episodes/domain/entities/entities.dart';
-import 'package:rick_morty_app/features/episodes/data/models/models.dart';
-import 'package:rick_morty_app/features/episodes/domain/repository/repository.dart';
+import '../../domain/domain.dart';
+import '../models/models.dart';
 
 class RemoteEpisodeRepository implements EpisodeRepository {
   final Dio dio;

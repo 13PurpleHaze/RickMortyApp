@@ -6,8 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:rick_morty_app/core/ui/ui.dart';
 
-import 'package:rick_morty_app/features/episodes/presentation/bloc/episodes_bloc.dart';
-import 'package:rick_morty_app/features/episodes/presentation/widgets/episode_card_shimmer.dart';
+import '../bloc/episodes_bloc.dart';
+import '../widgets/widgets.dart';
 
 @RoutePage()
 class EpisodesScreen extends StatefulWidget {
