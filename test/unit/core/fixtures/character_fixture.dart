@@ -13,8 +13,22 @@ class CharacterFixture {
         origin: NameLink(name: 'name', url: 'url'),
         location: NameLink(name: 'name', url: 'url'),
         image: 'image',
-        episode: ['episode'],
+        episode: ['/1'],
       ),
+    );
+  }
+
+  static Character single({int id = 1}) {
+    return Character(
+      id: id,
+      name: 'name',
+      status: CharacterStatus.alive,
+      species: 'species',
+      gender: CharacterGender.male,
+      origin: NameLink(name: 'name', url: 'url'),
+      location: NameLink(name: 'name', url: 'url'),
+      image: 'image',
+      episode: ['/1'],
     );
   }
 }
