@@ -13,7 +13,6 @@ import 'package:rick_morty_app/features/characters/characters.dart';
 import 'package:rick_morty_app/features/episodes/episodes.dart';
 import 'package:rick_morty_app/features/character/character.dart';
 import 'package:rick_morty_app/features/settings/settings.dart';
-import 'package:rick_morty_app/features/add_to_favorites/add_to_favorites.dart';
 import 'package:rick_morty_app/features/favorites/favorites.dart';
 
 class App extends StatelessWidget {
@@ -75,12 +74,6 @@ class App extends StatelessWidget {
             create:
                 (context) => ThemeCubit(
                   settingsRepository: context.read<SettingsRepository>(),
-                ),
-          ),
-          BlocProvider(
-            create:
-                (context) => AddToFavoritesBloc(
-                  favoriteRepository: context.read<FavoriteRepository>(),
                 ),
           ),
           BlocProvider(
