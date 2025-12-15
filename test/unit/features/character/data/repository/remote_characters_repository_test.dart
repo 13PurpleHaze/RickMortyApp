@@ -6,7 +6,6 @@ import 'package:rick_morty_app/features/character/character.dart';
 
 import '../../../../core/mocks/mocks.mocks.dart';
 
-@GenerateMocks([Dio])
 void main() {
   late MockDio mockDio;
   late RemoteCharactersRepository sut;

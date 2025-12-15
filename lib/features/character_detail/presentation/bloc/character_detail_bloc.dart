@@ -35,7 +35,6 @@ class CharacterDetailBloc
 
       emit(CharacterDetailLoaded(character, episodes));
     } catch (e) {
-      print(e);
       emit(CharacterDetailFailure(error: e));
     }
   }

@@ -7,16 +7,16 @@ class LocalSettingsRepository implements SettingsRepository {
 
   LocalSettingsRepository({required this.preferences});
 
-  static const _isDarkThemeSelectedKey = 'dark_theme_selected';
+  static const isDarkThemeSelectedKey = 'dark_theme_selected';
 
   @override
   bool isDarkThemeSelected() {
-    final selected = preferences.getBool(_isDarkThemeSelectedKey);
+    final selected = preferences.getBool(isDarkThemeSelectedKey);
     return selected ?? false;
   }
 
   @override
   Future<void> setDarkThemeSelected(bool selected) async {
-    await preferences.setBool(_isDarkThemeSelectedKey, selected);
+    await preferences.setBool(isDarkThemeSelectedKey, selected);
   }
 }

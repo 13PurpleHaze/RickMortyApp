@@ -66,6 +66,7 @@ dev_dependencies:
   husky: ^0.1.7
   json_serializable: ^6.9.5
   drift_dev: ^2.28.0
+  bloc_test: ^10.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
