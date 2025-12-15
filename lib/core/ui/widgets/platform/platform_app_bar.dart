@@ -101,6 +101,7 @@ class _PlatformAppBarState extends State<PlatformAppBar> {
               mainAxisSize: MainAxisSize.min,
               children: widget.actions,
             ),
+            heroTag: Object(), //
           )
           : CupertinoSliverNavigationBar(
             stretch: true,
@@ -110,6 +111,7 @@ class _PlatformAppBarState extends State<PlatformAppBar> {
               mainAxisSize: MainAxisSize.min,
               children: widget.actions,
             ),
+            heroTag: Object(),
           );
     }
   }

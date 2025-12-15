@@ -3,7 +3,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:rick_morty_app/core/ui/ui.dart';
-import 'package:rick_morty_app/features/add_to_favorites/add_to_favorites.dart';
 
 import '../bloc/favorites_bloc.dart';
 import '../widgets/widgets.dart';
@@ -29,7 +28,14 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
       body: CustomScrollView(
         slivers: [
           PlatformAppBar(title: "Favorites"),
-          BlocBuilder<FavoritesBloc, FavoritesState>(
+          BlocConsumer<FavoritesBloc, FavoritesState>(
+            listener: (context, state) {
+              if (state is FavoriteToggledFailure) {
+                _showDialog();
+              }
+            },
+            buildWhen:
+                (previous, current) => current is! FavoriteToggledFailure,
             builder: (context, state) {
               if (state is FavoritesLoading) {
                 return SliverFillRemaining(child: PlatformBackgroundLoader());
@@ -72,9 +78,8 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   );
                 }
               }
-
               if (state is FavoritesFailure) {
-                SliverFillRemaining(
+                return SliverFillRemaining(
                   child: TextBanner(
                     title: 'Error occurred',
                     description:
@@ -88,6 +93,35 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  // TODO: его лучше вынести тк он должен еще появляться на деталке
+  void _showDialog() {
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog.adaptive(
+          title: const Text('Error adding to favorites'),
+          content: const SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Try again later, sorry😔'),
+                Text('領域展開'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

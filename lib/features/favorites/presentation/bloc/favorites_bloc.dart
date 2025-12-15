@@ -12,16 +12,50 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
     : _favoriteRepository = favoriteRepository,
       super(FavoritesInitial()) {
     on<LoadFavorites>(_load);
+    on<ToggleFavorite>(_toggle);
   }
 
   Future<void> _load(LoadFavorites event, Emitter<FavoritesState> emit) async {
     try {
       emit(FavoritesLoading());
       final favorites = await _favoriteRepository.loadCharacters();
-      emit(FavoritesLoaded(favorites: favorites));
+      emit(
+        FavoritesLoaded(
+          favorites: favorites,
+          favoriteIds: favorites.map((favorite) => favorite.id).toList(),
+        ),
+      );
     } catch (e) {
-      print(e);
       emit(FavoritesFailure(error: e));
+    }
+  }
+
+  Future<void> _toggle(
+    ToggleFavorite event,
+    Emitter<FavoritesState> emit,
+  ) async {
+    try {
+      if (state is! FavoritesLoaded) {
+        return;
+      }
+      final isFavorite = (state as FavoritesLoaded).favoriteIds.contains(
+        event.character.id,
+      );
+      if (isFavorite) {
+        await _favoriteRepository.removeFromFavorites(event.character.id);
+      } else {
+        await _favoriteRepository.addToFavorites(event.character);
+      }
+
+      final favorites = await _favoriteRepository.loadCharacters();
+      emit(
+        FavoritesLoaded(
+          favorites: favorites,
+          favoriteIds: favorites.map((f) => f.id).toList(),
+        ),
+      );
+    } catch (e) {
+      emit(FavoriteToggledFailure(error: e));
     }
   }
 }
