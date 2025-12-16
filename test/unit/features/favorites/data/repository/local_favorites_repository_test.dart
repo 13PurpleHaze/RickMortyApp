@@ -4,7 +4,7 @@ import 'package:rick_morty_app/core/db/database.dart';
 import 'package:rick_morty_app/features/favorites/favorites.dart';
 import 'package:drift/native.dart';
 
-import '../../../../core/fixtures/character_fixture.dart';
+import '../../../../../fixtures/character_fixture.dart';
 
 void main() {
   late AppDatabase mockDB;

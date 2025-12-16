@@ -6,7 +6,7 @@ import 'package:mockito/mockito.dart';
 
 import 'package:rick_morty_app/features/characters/characters.dart';
 
-import '../../../../core/fixtures/character_fixture.dart';
+import '../../../../../fixtures/character_fixture.dart';
 import '../../../../core/mocks/mocks.mocks.dart';
 
 main() {

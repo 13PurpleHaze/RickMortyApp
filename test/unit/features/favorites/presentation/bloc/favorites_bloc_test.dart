@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rick_morty_app/features/favorites/favorites.dart';
 
-import '../../../../core/fixtures/character_fixture.dart';
+import '../../../../../fixtures/character_fixture.dart';
 import '../../../../core/mocks/mocks.mocks.dart';
 
 void main() {
