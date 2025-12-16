@@ -1,6 +1,6 @@
 part of 'favorites_bloc.dart';
 
-sealed class FavoritesState {}
+class FavoritesState {}
 
 final class FavoritesInitial extends FavoritesState {}
 
