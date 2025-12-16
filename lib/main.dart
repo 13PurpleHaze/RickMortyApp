@@ -9,22 +9,28 @@ import 'package:rick_morty_app/core/network/api.dart';
 import 'package:rick_morty_app/firebase_options.dart';
 
 Future<void> main() async {
+  await _runApp();
+}
+
+Future<void> _runApp() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await dotenv.load(fileName: ".env");
   final preferences = await SharedPreferences.getInstance();
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   final config = dotenv.env;
-  final baseURL = config['API_URL'];
-  final dio = Api(baseURL!);
-  final database = AppDatabase();
+  final baseURL = config['API_URL'] ?? 'https://rickandmortyapi.com/api';
+  final apiClient = Api(baseURL);
+  final appDatabase = AppDatabase();
 
   runApp(
     App(
       preferences: preferences,
-      dio: dio.dio,
+      dio: apiClient.dio,
       config: config,
-      database: database,
+      database: appDatabase,
     ),
   );
 }
