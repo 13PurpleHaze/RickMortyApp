@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rick_morty_app/core/db/database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:rick_morty_app/core/db/database.dart';
+import 'package:rick_morty_app/core/services/firebase_analitics/firebase_analytics_service.dart';
 import 'package:rick_morty_app/core/ui/ui.dart';
 import 'package:rick_morty_app/core/router/router.dart';
 
@@ -48,6 +49,9 @@ class App extends StatelessWidget {
         RepositoryProvider<FavoriteRepository>(
           create: (context) => LocalFavoritesRepository(database: database),
         ),
+        RepositoryProvider<FirebaseAnalyticsService>(
+          create: (context) => FirebaseAnalyticsService(),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -80,6 +84,8 @@ class App extends StatelessWidget {
             create:
                 (context) => FavoritesBloc(
                   favoriteRepository: context.read<FavoriteRepository>(),
+                  firebaseAnalyticsService:
+                      context.read<FirebaseAnalyticsService>(),
                 ),
           ),
         ],

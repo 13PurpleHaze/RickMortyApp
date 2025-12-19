@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:rick_morty_app/core/services/firebase_analitics/firebase_analytics_service.dart';
 import 'package:rick_morty_app/features/character/character.dart';
+import 'package:rick_morty_app/features/favorites/events/favorites_events.dart';
 import 'package:rick_morty_app/features/favorites/favorites.dart';
 
 part 'favorites_event.dart';
@@ -7,10 +9,14 @@ part 'favorites_state.dart';
 
 class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
   final FavoriteRepository _favoriteRepository;
+  final FirebaseAnalyticsService _firebaseAnalyticsService;
 
-  FavoritesBloc({required FavoriteRepository favoriteRepository})
-    : _favoriteRepository = favoriteRepository,
-      super(FavoritesInitial()) {
+  FavoritesBloc({
+    required FirebaseAnalyticsService firebaseAnalyticsService,
+    required FavoriteRepository favoriteRepository,
+  }) : _favoriteRepository = favoriteRepository,
+       _firebaseAnalyticsService = firebaseAnalyticsService,
+       super(FavoritesInitial()) {
     on<LoadFavorites>(_load);
     on<ToggleFavorite>(_toggle);
   }
@@ -46,6 +52,7 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
       } else {
         await _favoriteRepository.addToFavorites(event.character);
       }
+      _firebaseAnalyticsService.logEvent(ToggleFavoriteEvent());
 
       final favorites = await _favoriteRepository.loadCharacters();
       emit(
